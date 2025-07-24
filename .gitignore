@@ -1,0 +1,19 @@
+# Ignore virtual environments
+venv/
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# VS Code settings
+.vscode/
+
+# Environment variables
+.env
+
+# Media uploads (optional)
+media/
+
+# Ignore virtual environment
+.venv/
