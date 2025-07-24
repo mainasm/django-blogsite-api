@@ -22,6 +22,14 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField()
+    avatar = models.ImageField(upload_to='avatars/')
+
+    def __str__(self):
+        return self.user.username
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
