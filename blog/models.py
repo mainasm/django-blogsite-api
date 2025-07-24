@@ -9,6 +9,21 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.name
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
+
 class Post(models.Model):
     title = models.CharField(max_length=200)
     # slug  = models.SlugField(unique=True)
@@ -18,6 +33,8 @@ class Post(models.Model):
     published_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField(Category)
+    tags = models.ManyToManyField('Tag', blank=True, related_name='posts')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.title
