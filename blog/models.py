@@ -8,16 +8,23 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-
+    
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(unique=True)
+    
+    def __str__(self):
+        return self.name
+    
 class Post(models.Model):
     title = models.CharField(max_length=200)
-    # slug  = models.SlugField(unique=True)
     slug  = models.SlugField(unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     published_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField(Category)
+    tags = models.ManyToManyField('Tag',blank=True,related_name='posts')
 
     def __str__(self):
         return self.title
@@ -30,3 +37,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.author} on {self.post}'
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
+    avatar = models.ImageField(upload_to='profile_pics',default='default.jpg')
+    
+    def __str__(self):
+        return f'{self.user.username}\'s profile' if self.user else 'unnamed Profile'
