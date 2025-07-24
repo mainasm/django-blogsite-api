@@ -6,6 +6,8 @@ router = DefaultRouter()
 router.register(r'posts', PostViewSet)
 router.register(r'comments', CommentViewSet)
 router.register(r'categories', CategoryViewSet)
+from .views import ProfileViewSet
+router.register(r'profiles', ProfileViewSet)
 
 urlpatterns = [
     path('', include(router.urls))
