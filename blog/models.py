@@ -9,6 +9,22 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(unique=True)
+    
+    def _str_(self):
+        return self.name
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    bio = models.TextField(blank=True)
+    avatar = models.ImageField(upload_to='profile_pics',default='default.jpg')
+    
+    def _str_(self):
+        return f'{self.user.username}\'s profile' if self.user else 'unnamed Profile'
+        
+
 class Post(models.Model):
     title = models.CharField(max_length=200)
     # slug  = models.SlugField(unique=True)
