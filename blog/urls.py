@@ -9,4 +9,5 @@ router.register(r'categories', CategoryViewSet)
 
 urlpatterns = [
     path('', include(router.urls))
-]
+]  
+
