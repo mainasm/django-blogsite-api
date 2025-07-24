@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from .models import Post, Comment, Category
-from .serializers import PostSerializer, CommentSerializer, CategorySerializer
+from .models import Post, Comment, Category, Profile
+from .serializers import PostSerializer, CommentSerializer, CategorySerializer, ProfileSerializer
 
 # Create your viewsets here.
 class PostViewSet (viewsets.ModelViewSet):
@@ -15,3 +15,7 @@ class CommentViewSet (viewsets.ModelViewSet):
 class CategoryViewSet (viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+
+class ProfileViewSet (viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
