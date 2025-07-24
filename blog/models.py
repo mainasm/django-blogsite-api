@@ -30,11 +30,8 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.author} on {self.post}'
-    
-    # ...existing code...
 
 
-# Profile model as a separate class
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(blank=True)
