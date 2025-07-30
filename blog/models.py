@@ -30,3 +30,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.author} on {self.post}'
+    
+class Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    bio = models.TextField(default="Good")
+    avatar = models.ImageField(upload_to='users/')
+
+    def __str__(self):
+        return f'{self.user}'

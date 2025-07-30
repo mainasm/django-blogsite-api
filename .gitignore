@@ -1,0 +1,47 @@
+# Python
+*.pyc
+__pycache__/
+*.log
+*.pot
+*.mo
+
+# Virtual Environment
+.venv/
+env/
+venv/
+ENV/
+.env
+.flaskenv
+
+# Django specific
+db.sqlite3
+media/
+static_collected/ # If you use collectstatic and don't want to commit generated static files
+local_settings.py # If you create a separate file for local settings, though .env is preferred
+
+# IDE specific (e.g., VS Code, PyCharm)
+.vscode/
+.idea/
+
+# Operating System Files
+.DS_Store # macOS
+Thumbs.db # Windows
+ehthumbs.db # Windows
+
+# Test / Coverage files
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Distribution / Packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Other temporary or generated files
+*.bak
+*.swp # Vim swap files
