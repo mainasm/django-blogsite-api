@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'rest_framework',
+    'rest_framework.authtoken',  # Added this line to enable token authentication
 ]
 
 MIDDLEWARE = [
