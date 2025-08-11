@@ -1,24 +1,35 @@
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from .permission import IsAuthorOrReadOnly
+from .permission import (
+    IsAuthorOrReadOnly,
+    CanManagePost,
+    CanManageComment,
+    CanManageCategory,
+)
 from .models import Post, Comment, Category
 from .serializers import PostSerializer, CommentSerializer, CategorySerializer
-from rest_framework.permissions import IsAuthenticated
-
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    # permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
-    permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
+    permission_classes = [CanManagePost, IsAuthorOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticatedOrReadOnly, IsAuthorOrReadOnly]
+    permission_classes = [CanManageComment, IsAuthorOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = IsAuthenticatedOrReadOnly
+    permission_classes = [CanManageCategory, IsAuthorOrReadOnly]
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
