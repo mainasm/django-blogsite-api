@@ -1,0 +1,13 @@
+name: gitStream workflow
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  run-gitstream:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run gitStream automation placeholder
+        run: echo "gitStream workflow running"
